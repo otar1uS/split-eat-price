@@ -25,9 +25,12 @@ const Bill = ({
     const balanceOfSelectedFriend = selectedFriend.balance;
 
     if (
-      !(totalBill === yourExpense + selectedFriendExpense && totalBill !== 0)
+      !(
+        totalBill === yourExpense + selectedFriendExpense &&
+        totalBill !== 0 &&
+        totalBill > 0
+      )
     ) {
-      console.log("error");
       return;
     }
 
@@ -46,6 +49,9 @@ const Bill = ({
   return (
     <form className="form-split-bill" onSubmit={formHandler}>
       <h2>{selectedFriend.name}</h2>
+      {!(Number(state.billValue) > 0) && (
+        <h2 style={{ color: "red" }}>Bill value must be more than 0</h2>
+      )}
       <label>💰 Bill value</label>
       <input
         type="number"
